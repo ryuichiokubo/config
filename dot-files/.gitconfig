@@ -1,0 +1,40 @@
+[user]
+	name = Ryuichi Okubo
+	email = ryuichi.okubo.1986@gmail.com
+[color]
+	ui = true
+[credential]
+	helper = osxkeychain
+[alias]
+	br = branch -v
+	co = checkout
+	logg = log --graph -n 10 --oneline
+	st = status
+	comm = commit -m
+	unstage = reset HEAD --
+	discard = checkout --
+	grep = grep -E
+	grepp = grep -P
+	diff = diff -w
+	dif = diff -w
+	comma = commit --amend
+	stashl = stash list --pretty=format:'%gd (%ai) %gs'
+[merge]
+	tool = extMerge
+[mergetool "extMerge"]
+	cmd = extMerge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[mergetool]
+	trustExitCode = false
+;[diff]
+;	external = extDiff
+[core]
+	excludesfile = /Users/ryuichiokubo/.gitignore_global
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[push]
+	default = simple
