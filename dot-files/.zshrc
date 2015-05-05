@@ -19,9 +19,11 @@ setopt share_history
 
 ## Environment variable configuration
 #
-export LANG=ja_JP.UTF-8
+export LANG=en_GB.UTF-8
 export JAVA_HOME=`/usr/libexec/java_home`
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/Users/ryuichiokubo/libraries/android-sdk/platform-tools/:/Users/ryuichiokubo/libraries/xulrunner-sdk/bin/:/Users/ryuichiokubo/bin/:/Users/ryuichiokubo/libraries/apache-maven-3.2.1/bin/:/Users/ryuichiokubo/libraries/adt-bundle-mac-x86_64-20131030/sdk/tools/:/usr/local/mysql/bin
+export ANDROID_HOME="$HOME/libraries/android-sdk/sdk"
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:$ANDROID_HOME/platform-tools:$HOME/libraries/xulrunner-sdk/bin/:$HOME/bin/:$HOME/libraries/apache-maven-3.2.1/bin/:$ANDROID_HOME/tools:$ANDROID_HOME/build-tools/19.1.0:/usr/local/mysql/bin:$HOME/jongla/qa-tools/bin
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman
 export EDITOR=/usr/bin/vim
 
 
@@ -125,8 +127,8 @@ bindkey "^N" history-beginning-search-forward-end
 
 ## alias
 #
-alias ls="ls -aGF"
-alias ll='ls -ltr'
+alias ls="ls -aGF --color=auto"
+alias ll='ls -ltr --color=auto'
 alias df="df -h"
 alias du="du -h"
 alias grep="grep --color"
