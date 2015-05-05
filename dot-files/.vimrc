@@ -35,6 +35,14 @@ Plugin 'scrooloose/syntastic.git'
 Plugin 'gioele/vim-autoswap.git'
 Plugin 'mru.vim'
 
+Plugin 'itchyny/calendar.vim'
+let g:calendar_google_calendar = 1
+
+Plugin 'fugitive.vim'
+""set statusline+=%{fugitive#statusline()}
+
+Bundle 'ntpeters/vim-better-whitespace'
+
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'wavded/vim-stylus'
 
@@ -110,6 +118,14 @@ set expandtab
 "カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 
+set ruler
+"set spell
+set splitright
+set autoread
+
+"prevent error crontab: temp file must be edited in place
+set backupskip=/tmp/*,/private/tmp/*
+
 "行の折り返しをしている時に見た目の次の行へ移動する FIXME
 nnoremap j gj
 nnoremap k gk
@@ -132,3 +148,26 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "shortcut for console log
 command -nargs=1 Console :normal iconsole.log("@@@@@@@@ <args>: ", <args>)
 
+"quickly edit vimrc and update
+let mapleader = "_"
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>
+
+"set all window sizes equal
+nnoremap <leader>eq :set equalalways! equalalways!<cr>
+
+"indent xml
+nnoremap <leader>xf :%s/></>\r</g \| filetype indent on \| setf xml \| normal gg=G<cr>
+
+"disable arrow keys in insert mode (use normal mode to move around)
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+"escape easily
+inoremap jk <esc>
+inoremap <esc> <nop>
+
+"open notes directory
+nnoremap <leader>note :tabe ~/projects/Notebook/notes<cr>
