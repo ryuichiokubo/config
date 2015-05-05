@@ -127,7 +127,7 @@ bindkey "^N" history-beginning-search-forward-end
 
 ## alias
 #
-alias ls="ls -aGF --color=auto"
+alias ls="ls -AGF --color=auto"
 alias ll='ls -ltr --color=auto'
 alias df="df -h"
 alias du="du -h"

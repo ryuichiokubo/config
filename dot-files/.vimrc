@@ -4,7 +4,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
+"set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 " alternatively, pass a path where Vundle should install plugins
 "let path = '~/some/path/here'
@@ -82,7 +83,7 @@ set laststatus=2
 set autoindent
 "バックアップファイルを作るディレクトリ
 set backup
-set backupdir=$HOME/vimbackup/backup
+set backupdir=$HOME/vimbackup/backup "mkdir if not there
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
 set browsedir=buffer 
 "クリップボードをWindowsと連携
@@ -90,7 +91,7 @@ set clipboard=unnamed
 "Vi互換をオフ
 set nocompatible
 "スワップファイル用のディレクトリ
-set directory=$HOME/vimbackup/swap
+set directory=$HOME/vimbackup/swap "mkdir if not there
 "変更中のファイルでも、保存しないで他のファイルを表示
 set hidden
 "インクリメンタルサーチを行う
