@@ -1,4 +1,4 @@
-" *** Vundle setup start ***
+" Vundle setup ---------------------- {{{
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -63,10 +63,16 @@ filetype plugin indent on     " required
 " NOTE: comments after Plugin commands are not allowed.
 " Put your stuff after this line
 "
-" *** Vundle setup end ***
+" }}}
 
-colorscheme koehler 
+" Color ---------------------- {{{
+colorscheme koehler
+" copied fold color from slate
+:hi Folded guibg=black guifg=grey40 ctermfg=grey ctermbg=darkgrey
+:hi FoldColumn guibg=black guifg=grey20 ctermfg=4 ctermbg=7
+" }}}
 
+" Basic Settings ---------------------- {{{
 " 全モードでマウスを有効化
 set mouse=a
 " ビープの代わりにビジュアルベル（画面フラッシュ）を使う
@@ -85,7 +91,7 @@ set autoindent
 set backup
 set backupdir=$HOME/vimbackup/backup "mkdir if not there
 "ファイル保存ダイアログの初期ディレクトリをバッファファイル位置に設定
-set browsedir=buffer 
+set browsedir=buffer
 "クリップボードをWindowsと連携
 set clipboard=unnamed
 "Vi互換をオフ
@@ -126,6 +132,31 @@ set autoread
 
 "prevent error crontab: temp file must be edited in place
 set backupskip=/tmp/*,/private/tmp/*
+" }}}
+
+" FileType specific settings ---------------------- {{{
+
+"autocompletion ---------------------- {{{
+augroup completion
+  autocmd!
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+augroup END
+
+" fold settings
+augroup folding
+  autocmd!
+  autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" }}}
+
+" Basic mappings ---------------------- {{{
+let mapleader = "_"
 
 "行の折り返しをしている時に見た目の次の行へ移動する FIXME
 nnoremap j gj
@@ -144,7 +175,6 @@ noremap <C-o> :FufBuffer<CR>
 command! -nargs=1 Console :normal iconsole.log("@@@@@@@@ <args>: ", <args>)
 
 "quickly edit vimrc and update
-let mapleader = "_"
 nnoremap <leader>ve :vsplit $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>:echo "vimrc reloaded"<cr>
 
@@ -168,36 +198,35 @@ inoremap <esc> <nop>
 "open notes directory
 nnoremap <leader>note :tabe ~/projects/Notebook/notes<cr>
 
-"autocompletion
-augroup completion
-  autocmd!
-  autocmd FileType python set omnifunc=pythoncomplete#Complete
-  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-augroup END
+"inside next parentheses
+onoremap in( :<c-u>normal! f(vi(<cr>
 
-"shortcut for comments
+" }}}
+
+" FileType specific mappings ---------------------- {{{
+
+"shortcut for comments ---------------------- {{{
 augroup shortcut_comment
   autocmd!
   autocmd FileType javascript nnoremap <buffer> <leader>c I//<esc>
   autocmd FileType php nnoremap <buffer> <leader>c I//<esc>
   autocmd FileType coffee nnoremap <buffer> <leader>c I#<esc>
 augroup END
+" }}}
 
-"shortcut for function
+"shortcut for function ---------------------- {{{
 augroup shortcut_function
   autocmd!
   autocmd FileType javascript :iabbrev <buffer> func function() {}<left>
 augroup END
+" }}}
 
-"shortcut for logging
+"shortcut for logging ---------------------- {{{
 augroup shortcut_logging
   autocmd!
   autocmd FileType javascript :iabbrev <buffer> cons console.log("@@@@@@@ ")<left>
   autocmd FileType coffee :iabbrev <buffer> cons console.log "@@@@@@@ "<left>
 augroup END
+" }}}
 
-"inside next parentheses
-onoremap in( :<c-u>normal! f(vi(<cr>
-
+" }}}
