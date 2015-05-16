@@ -135,27 +135,22 @@ inoremap <C-e> <End>
 inoremap <C-a> <HOME>
 
 "File search
+"call fuf#setOneTimeVariables(['g:fuf_coveragefile_globPatterns',
+"['**/*.coffee', '**/*.js']]) # FIXME
 noremap <C-p> :FufFile **/<CR>
+noremap <C-o> :FufBuffer<CR>
 
-"Map for frequently used code snipet
-inoremap <C-l> console.log("@@@@@@@@ ")
-
-"autocompletion
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-"shortcut for console log
-command -nargs=1 Console :normal iconsole.log("@@@@@@@@ <args>: ", <args>)
+"shortcut for console log # XXX
+command! -nargs=1 Console :normal iconsole.log("@@@@@@@@ <args>: ", <args>)
 
 "quickly edit vimrc and update
 let mapleader = "_"
 nnoremap <leader>ve :vsplit $MYVIMRC<cr>
-nnoremap <leader>vs :source $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>:echo "vimrc reloaded"<cr>
 
 "set all window sizes equal
 nnoremap <leader>eq :set equalalways! equalalways!<cr>
+"autocmd FocusGained * <leader>eq<cr> "FIXME
 
 "indent xml
 nnoremap <leader>xf :%s/></>\r</g \| filetype indent on \| setf xml \| normal gg=G<cr>
@@ -172,3 +167,37 @@ inoremap <esc> <nop>
 
 "open notes directory
 nnoremap <leader>note :tabe ~/projects/Notebook/notes<cr>
+
+"autocompletion
+augroup completion
+  autocmd!
+  autocmd FileType python set omnifunc=pythoncomplete#Complete
+  autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+augroup END
+
+"shortcut for comments
+augroup shortcut_comment
+  autocmd!
+  autocmd FileType javascript nnoremap <buffer> <leader>c I//<esc>
+  autocmd FileType php nnoremap <buffer> <leader>c I//<esc>
+  autocmd FileType coffee nnoremap <buffer> <leader>c I#<esc>
+augroup END
+
+"shortcut for function
+augroup shortcut_function
+  autocmd!
+  autocmd FileType javascript :iabbrev <buffer> func function() {}<left>
+augroup END
+
+"shortcut for logging
+augroup shortcut_logging
+  autocmd!
+  autocmd FileType javascript :iabbrev <buffer> cons console.log("@@@@@@@ ")<left>
+  autocmd FileType coffee :iabbrev <buffer> cons console.log "@@@@@@@ "<left>
+augroup END
+
+"inside next parentheses
+onoremap in( :<c-u>normal! f(vi(<cr>
+
