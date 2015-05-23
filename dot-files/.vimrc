@@ -47,11 +47,14 @@ Bundle 'ntpeters/vim-better-whitespace'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'wavded/vim-stylus'
 
+Plugin 'snipMate'
+" Snippets are in ~/.vim/bundle/snipMate/snippets
+
 syntax enable
 
-filetype plugin indent on     " required
+"filetype plugin indent on     " required
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on
 "
 " Brief help
 " :PluginList          - list configured plugins
@@ -171,9 +174,6 @@ inoremap <C-a> <HOME>
 noremap <C-p> :FufFile **/<CR>
 noremap <C-o> :FufBuffer<CR>
 
-"shortcut for console log # XXX
-command! -nargs=1 Console :normal iconsole.log("@@@@@@@@ <args>: ", <args>)
-
 "quickly edit vimrc and update
 nnoremap <leader>ve :vsplit $MYVIMRC<cr>
 nnoremap <leader>vs :source $MYVIMRC<cr>:echo "vimrc reloaded"<cr>
@@ -218,14 +218,6 @@ augroup END
 augroup shortcut_function
   autocmd!
   autocmd FileType javascript :iabbrev <buffer> func function() {}<left>
-augroup END
-" }}}
-
-"shortcut for logging ---------------------- {{{
-augroup shortcut_logging
-  autocmd!
-  autocmd FileType javascript :iabbrev <buffer> cons console.log("@@@@@@@ ")<left>
-  autocmd FileType coffee :iabbrev <buffer> cons console.log "@@@@@@@ "<left>
 augroup END
 " }}}
 
